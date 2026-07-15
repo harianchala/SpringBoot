@@ -60,7 +60,7 @@ public class ProductService {
 			Product productFromDB=getSingleProduct(prodid);
 			productFromDB.setCategory(updatedProduct.getCategory());
 			productFromDB.setDescription(updatedProduct.getDescription());
-			productFromDB.setImage(updatedProduct.getImage());
+			//productFromDB.setImage(updatedProduct.getImage());
 			productFromDB.setPrice(updatedProduct.getPrice());
 			productFromDB.setTitle(updatedProduct.getTitle());
 			return productRepository.save(productFromDB);
@@ -68,6 +68,13 @@ public class ProductService {
 		
 		throw new ProductNotFoundException("Product with ID " +prodid + " does not exist");
 	}
+
+	public void deleteAllProducts() {
+	    productRepository.deleteAll();
+	}
+
+
+	
 	
 	
 
