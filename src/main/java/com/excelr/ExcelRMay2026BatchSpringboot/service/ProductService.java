@@ -22,7 +22,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 
-
+//chnage i done
 	public List<Product> saveProducts(List<Product> products) {
 		
 		return productRepository.saveAll(products);
@@ -69,6 +69,7 @@ public class ProductService {
 		throw new ProductNotFoundException("Product with ID " +prodid + " does not exist");
 	}
 
+	// change i done
 	public void deleteAllProducts() {
 	    productRepository.deleteAll();
 	}

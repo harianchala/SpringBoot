@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.excelr.ExcelRMay2026BatchSpringboot.entity.Product;
 import com.excelr.ExcelRMay2026BatchSpringboot.service.ProductService;
@@ -61,6 +62,7 @@ public class ProductControllerUI {
 		return "redirect:/show-all-products";
 	}
 	
+	//addmultiple
 	@PostMapping("/addMultipleProducts")
 	public String saveMultipleProducts(@RequestBody List<Product> products) {
 
@@ -69,6 +71,7 @@ public class ProductControllerUI {
 	    return "redirect:/show-all-products";
 	}
 	
+	
 	@RequestMapping("/deleteProductUI/{pid}")
 	public String deleteProductUI(@PathVariable int pid)
 	{
@@ -76,6 +79,7 @@ public class ProductControllerUI {
 	return "redirect:/show-all-products";
 	}
 	
+	//deleteall
 	@RequestMapping("/deleteAllProducts")
 	public String deleteAllProducts() {
 
@@ -123,4 +127,22 @@ public class ProductControllerUI {
 	productService.updateProduct(prodId, product);
 	return "redirect:/show-all-products";
 	}
-}
+	
+
+	@RequestMapping(value = "/403")
+	public ModelAndView accessDenied(Principal user) {
+		ModelAndView model = new ModelAndView();
+		if (user != null) {
+			model.addObject("msg", "Hi " + user.getName() 
+			+ ", you do not have permission to access this page!");
+		} else {
+			model.addObject("msg", 
+			    "you do not have permission to access this page!");
+		}
+
+		model.setViewName("403");
+		return model;
+
+	}
+
+	}
